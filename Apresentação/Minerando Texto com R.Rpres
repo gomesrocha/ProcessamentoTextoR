@@ -4,6 +4,7 @@ author: Fabio Gomes Rocha
 date: 
 autosize: true
 - Universidade Tiradentes / GPITIC
+- Material de apoio desenvolvido em R
 
 O que é o R?
 ========================================================
@@ -18,7 +19,13 @@ O RStudio
 ========================================================
 
 ```{r}
-summary(cars)
+
+# Configurando o diretorio de trabalho
+getwd()
+setwd('/Users/pmm/R_Doutorado/Curso de R')
+
+# Imprimir na tela
+print('R - Uma das principais ferramentas do Cientista de Dados')
 ```
 
 Processamento de texto em R
