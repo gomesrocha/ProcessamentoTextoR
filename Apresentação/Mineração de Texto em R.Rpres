@@ -1,0 +1,352 @@
+Mineração de Texto em R
+========================================================
+author: Fabio Gomes Rocha
+date: 
+autosize: true
+transition:rotate
+<small> 
+I &nbsp;&nbsp;&nbsp;CONGENTI <br />
+Universidade Tiradentes
+</small>
+
+Agenda
+========================================================
+transition:rotate
+- O que é o R?
+- O que posso fazer com o R?
+- Iniciando em R
+- Mineração de texto
+- Minerando texto no R
+- Mão na massa
+
+O que é o R?
+========================================================
+transition:rotate
+- 1993: Projeto de pesquisa em Auckland, na Nova Zelândia
+- 1995: R liberado como projeto open-course
+- 1997: Formado o grupo R-Core
+- 2000: Liberada a versão 1.0.0 do R
+- 2003: Criação da R Foundation
+- 2004: Primeira conferência internacional de usuários em Vienna
+- 2015: Formado o R Consortium (com participação da IBM e Microsoft)
+
+O que posso fazer com o R?
+========================================================
+transition:rotate
+- Extração de Dados
+- Limpeza de Dados
+- Carregamento e Transformação de Dados
+- Análise Estatística
+- Modelagem Preditiva
+- Machine Learning
+- Visualização de Dados
+- Processamento de imagens [...]
+
+Iniciando em R
+========================================================
+transition:rotate
+> - getwd() --> Exibir diretório de trabalho
+> - setwd('/Users/pmm/R_Doutorado/Curso de R') --> fixar diretório
+> - print('R - Uma das principais ferramentas do Cientista de Dados') --> imprimir
+> - plot(1:30) --> gerar gráfico
+> - hist(rnorm(10)) --> Gerar grafico histograma
+> - install.packages('randomForest') --> instalando pacote
+> - library(ggplot2) --> carregando pacote
+> - variável = valor --> criando variáveis
+
+Iniciando em R
+========================================================
+transition:rotate
+Usando o if/else
+```{r}
+x = 7
+if (x < 7) {
+  "Este numero eh menor que 7"
+} else if(x == 7) {
+  "Este é o numero 7"
+}else{
+  "Este numero nao eh menor que 7"
+}
+```
+
+
+Iniciando em R
+========================================================
+transition:rotate
+Usando o ifelse
+```{r}
+x = 5
+ifelse (x < 6, "Correto", NA)
+```
+
+Iniciando em R
+========================================================
+transition:rotate
+Usando o Repeat
+```{r}
+x = 1
+repeat {
+  x = x + 3
+  if (x > 10)
+    break
+  print(x)}
+
+```
+
+
+Iniciando em R
+========================================================
+transition:rotate
+Usando o For
+```{r}
+for (i in 1:7) {print(i)}
+```
+
+Iniciando em R
+========================================================
+transition:rotate
+Usando o While
+```{r}
+y = 2
+while(y < 5){
+  y = y+10
+  print(y)
+}
+```
+
+Iniciando em R - String em R
+========================================================
+transition:rotate
+```{r}
+texto <- "Isso eh uma string!"
+texto
+x = as.character(3.14) 
+class(x) 
+```
+
+Iniciando em R - String em R
+========================================================
+transition:rotate
+```{r}
+nome = "Joselito"; sobrenome = "Silva" 
+paste(nome, sobrenome)
+cat(nome, sobrenome)
+```
+
+Iniciando em R - String em R
+========================================================
+transition:rotate
+```{r}
+texto <- "Isso eh uma string!"
+substr(texto, start=13, stop=18) 
+?substr
+```
+
+Iniciando em R - String em R
+========================================================
+transition:rotate
+```{r}
+nchar(texto)
+tolower(texto)
+toupper(texto)
+```
+
+
+Mineração de texto
+========================================================
+transition:rotate
+<br /><p /><br />
+Mineração de textos (Text Mining) é um Processo de Descoberta de Conhecimento, que utiliza técnicas de análise e extração de dados a partir de textos, frases ou apenas palavras
+<br />
+>A base de dados textuais é conhecida como corpora, sendo que cada um dos elementos de um corpora é tratado como um documento. 
+>O corpus é representado por: Corpus = {doc1, doc2, ..., docn}
+
+Mineração de texto
+========================================================
+transition:rotate
+<br /><p /><br />
+O corpus precisa ser preparado, exemplo de corpus:
+> Corpus = {doc1, doc2, ..., docn} 
+<br>
+> doc1 = "Estamos no I Congenti na Universidade Tiradentes fazendo o curso de Minerando texto em R"<br>
+> doc2 = "No segundo e terceiro dia do Congenti ocorreu palestras de tecnologia e no quarto dia teremos apenas oficina, entre elas a de Minerando texto em R"
+
+Mineração de texto
+========================================================
+transition:rotate
+<br /><p /><br />
+Criando tokens com base no corpus doc1 e doc 2
+> doc1 = Estamos| no| I |Congenti | na | Universidade| Tiradentes| fazendo| o |curso| de |Minerando| texto| em | R
+<br>
+> doc2 = No| segundo | e | terceiro |dia |do |Congenti | ocorreu | palestras | de | tecnologia | e | no | quarto | dia | teremos | apenas | oficina| , | entre |elas | a | de| Minerando | texto|  em | R
+
+Mineração de texto
+========================================================
+transition:rotate
+<br /><p /><br />
+Limpando palavras comuns (remoção de Stopwords)
+> doc1 = Estamos |Congenti | Universidade| Tiradentes| fazendo| curso| Minerando| texto|  R
+<br>
+> doc2 = segundo | terceiro |dia |Congenti | ocorreu | palestras | tecnologia | quarto | dia | teremos | apenas | oficina| Minerando | texto|   R
+
+Mineração de texto
+========================================================
+transition:rotate
+Dicionário de termos obtidos
+> termo 1 = Estamos   | termo 2 = Congenti
+<br>
+> termo 3 Universidade | termo 4 Tiradentes
+<br> 
+> termo 5 fazendo | termo 6 curso
+<br> 
+> termo 7 Minerando | termo 8 texto
+<br> 
+> termo 9 R | termo 10 segundo 
+<br> 
+> termo 11 terceiro | termo 12 dia 
+<br> 
+> termo 13 Congenti | termo 14 ocorreu 
+<br> 
+> termo 15 palestras |  termo 16 tecnologia 
+<br> 
+> termo 17 quarto |  termo 18 dia 
+<br> 
+> termo 19 teremos |  termo 20 apenas 
+<br> 
+> termo 21 oficina |termo 22 Minerando 
+<br> 
+> termo 23 texto |  termo 24 R
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Construindo um corpus
+```{r}
+library(tm)
+docs = VCorpus(DirSource("/Users/pmm/R_Doutorado/textos/", encoding = "UTF-8"), readerControl = list(reader=readPlain, language="por"))
+summary(docs)
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Exibindo informações
+```{r}
+inspect(docs[1])
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Exibindo informações
+```{r}
+writeLines(as.character(docs[1]))
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Pré-processamento
+```{r}
+docs <- tm_map(docs,removePunctuation) 
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, tolower)   
+docs <- tm_map(docs, removeWords, stopwords("portuguese"))
+docs <- tm_map(docs, stripWhitespace)
+docs <- tm_map(docs, PlainTextDocument)
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Pré-processamento
+```{r}
+dtm <- DocumentTermMatrix(docs)   
+dtm  
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Pré-processamento
+```{r}
+tdm <- TermDocumentMatrix(docs)   
+tdm   
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Processamento
+```{r}
+freq <- colSums(as.matrix(dtm))   
+length(freq)   
+ord <- order(freq)   
+m <- as.matrix(dtm)   
+dim(m)
+```
+
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Processamento
+```{r}
+head(table(m), 20) 
+tail(table(m), 20) 
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Processamento
+```{r}
+freqw <- colSums(as.matrix(m))   
+freqw 
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Processamento
+```{r}
+freql <- sort(colSums(as.matrix(m)), decreasing=TRUE)   
+wf <- data.frame(word=names(freql), freql=freql)
+library(ggplot2)   
+p <- ggplot(subset(wf, freql>5), aes(x = reorder(word, -freql), y = freql)) +
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x=element_text(angle=45, hjust=1))
+head(wf)
+```
+Mineração de texto em R
+========================================================
+transition:rotate
+Processamento
+```{r}
+p
+```
+
+Mineração de texto em R
+========================================================
+transition:rotate
+Processamento
+```{r}
+library(wordcloud)
+wordcloud(names(freql), freq, min.freq=5)  
+
+```
+
+Mão na massa
+========================================================
+transition:rotate
+- Construa um corpus
+- Com base no corpus faça o grafico de frequencia
+- Crie a nuvem de palavras
+
+Obrigado
+========================================================
+transition:rotate
+- https://github.com/gomesrocha/ProcessamentoTextoR
+- http://www.fabiogomesrocha.com
+
+
